@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{% static 'users/styles/images/favicon.ico' %}" type="image/x-icon" />
+  <!-- Icon - IconMonster -->
+  <link rel="stylesheet" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css" />
+  <!-- Mumble UI -->
+  <link rel="stylesheet" href="{% static 'users/uikit/styles/uikit.css' %}" />
+  <!-- Dev Search UI -->
+  <link rel="stylesheet" href="{% static 'users/styles/app.css' %}" />
+
+  <title>Bitiruvchi dasturchlarni qidirib top</title>
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="container container--narrow">
+      <a href="/users/static" class="header__logo">
+        <img src="{% static 'users/styles/images/logo.png' %}" alt="Logo" />
+      </a>
+      <nav class="header__nav">
+        <input type="checkbox" id="responsive-menu" />
+        <label for="responsive-menu" class="toggle-menu">
+          <span>Menu</span>
+          <div class="toggle-menu__lines"></div>
+        </label>
+        <ul class="header__menu">
+          <li class="header__menuItem"><a href="{% url 'home_page' %}">Bitiruvchilar</a></li>
+          <li class="header__menuItem"><a href="{% url 'projects' %}">Loyihalar</a></li>
+
+          <li class="header__menuItem"><a href="{% url 'account' %}">Mening sahifam</a></li>
+            {% if request.user.is_authenticated %}
+                <li class="header__menuItem"><a href="{% url 'logout' %}" class="btn btn--sub">Chiqish</a></li>
+            {% else %}
+                <li class="header__menuItem"><a href="{% url 'login' %}" class="btn btn--sub">Kirish/Ro'yxatdan o'tish</a></li>
+            {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="home">
+    <section class="hero-section text-center">
+      <div class="container container--narrow">
+        <div class="hero-section__box">
+          <h2>O'QUV MARKAZ<span> BITIRUVCHILARINI </span> QIDIRIB TOP</h2>
+        </div>
+
+        <div class="hero-section__search">
+          <form class="form" action="#" method="get">
+            <div class="form__field">
+              <label for="formInput#search">Bitiruvchilarni top </label>
+              <input class="input input--text" id="formInput#search" type="text" name="text"
+                placeholder="Bitiruvchi ismi bilan top" />
+            </div>
+
+            <input class="btn btn--sub btn--lg" type="submit" value="Qidir" />
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search Result: DevList -->
+    <section class="devlist">
+      <div class="container">
+        <div class="grid grid--three">
+          {% for profile in profiles %}
+          <div class="column card">
+            <div class="dev">
+              <a href="{% url 'profile_detail' profile.id %}" class="card__body">
+                <div class="dev__profile">
+                  {% if profile.profile_image %}
+                  <img class="avatar avatar--md" src="{{ profile.profile_image.url }}" alt="{{ profile.name }}" />
+                  {% else %}
+                  <img class="avatar avatar--md" src="{% static 'users/styles/images/default.png' %}" alt="default" />
+                  {% endif %}
+                  <div class="dev__meta">
+                    <h3>{{ profile.name }}</h3>
+                    <h5>{{ profile.bio|truncatewords:10 }}</h5>
+                  </div>
+                </div>
+                <p class="dev__info">
+                  {{ profile.bio }}
+                </p>
+                <div class="dev__skills">
+                  {% if profile.social_github %}<span class="tag tag--pill tag--main"><small>GitHub</small></span>{% endif %}
+                  {% if profile.social_telegram %}<span class="tag tag--pill tag--main"><small>Telegram</small></span>{% endif %}
+                  {% if profile.social_instagram %}<span class="tag tag--pill tag--main"><small>Instagram</small></span>{% endif %}
+                  {% if profile.social_youtube %}<span class="tag tag--pill tag--main"><small>YouTube</small></span>{% endif %}
+                  {% if profile.social_website %}<span class="tag tag--pill tag--main"><small>Website</small></span>{% endif %}
+                </div>
+              </a>
+            </div>
+          </div>
+          {% empty %}
+          <p>Hozircha foydalanuvchi yo‘q.</p>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <div class="pagination">
+      <ul class="container">
+        <li><a href="#" class="btn btn--disabled">&#10094; Orqaga</a></li>
+        <li><a href="#" class="btn btn--sub">01</a></li>
+        <li><a href="#" class="btn">02</a></li>
+        <li><a href="#" class="btn">03</a></li>
+        <li><a href="#" class="btn">04</a></li>
+        <li><a href="#" class="btn">05</a></li>
+        <li><a href="#" class="btn">06</a></li>
+        <li><a href="#" class="btn">07</a></li>
+        <li><a href="#" class="btn">08</a></li>
+        <li><a href="#" class="btn">09</a></li>
+        <li><a href="#" class="btn">10</a></li>
+        <li><a href="#" class="btn">Oldinga &#10095;</a></li>
+      </ul>
+    </div>
+  </main>
+</body>
+
+</html>

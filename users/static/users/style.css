@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f6f8;
+}
+
+/* HEADER */
+.header {
+    background: #1f2430;
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header nav a {
+    color: #ccc;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+.header .btn {
+    background: #2d3345;
+    border: none;
+    padding: 8px 15px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* HERO */
+.hero {
+    background: #1f2430;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.hero span {
+    color: #6cff8d;
+}
+
+.search {
+    margin-top: 20px;
+}
+
+.search input {
+    width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search button {
+    padding: 10px 20px;
+    border: none;
+    background: #4a90e2;
+    color: white;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* CARDS */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 40px;
+}
+
+.card {
+    background: white;
+    width: 300px;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card img {
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.card .job {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.tags span {
+    display: inline-block;
+    background: #eef1f5;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+
+
+
+
+

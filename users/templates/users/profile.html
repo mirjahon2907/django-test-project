@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ profile.name|default:profile.user.username }}</title>
+  <link rel="stylesheet" href="{% static 'users/uikit/styles/uikit.css' %}" />
+  <link rel="stylesheet" href="{% static 'users/styles/app.css' %}" />
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="container container--narrow">
+      <a href="{% url 'home_page' %}" class="header__logo">
+        <img src="{% static 'users/styles/images/logo.png' %}" alt="DevSearch Logo" />
+      </a>
+      <nav class="header__nav">
+        <ul class="header__menu">
+          <li class="header__menuItem"><a href="{% url 'home_page' %}">Bitiruvchilar</a></li>
+          <li class="header__menuItem"><a href="{% url 'projects' %}">Loyihalar</a></li>
+          {% if request.user.is_authenticated %}
+            <li class="header__menuItem"><a href="{% url 'logout' %}" class="btn btn--sub">Chiqish</a></li>
+          {% else %}
+            <li class="header__menuItem"><a href="{% url 'login' %}" class="btn btn--sub">Kirish/Ro'yxatdan o'tish</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Profile Section -->
+  <main class="profile my-md">
+    <div class="container">
+      <div class="layout">
+        <!-- Left Column -->
+        <div class="column column--1of3">
+          <div class="card text-center">
+            <div class="card__body dev">
+              {% if profile.profile_image %}
+                <img class="avatar avatar--xl" src="{{ profile.profile_image.url }}" alt="{{ profile.name }}">
+              {% else %}
+                <img class="avatar avatar--xl" src="{% static 'users/styles/images/default.png' %}" alt="default">
+              {% endif %}
+              <h2 class="dev__name">{{ profile.name|default:profile.user.username }}</h2>
+              <p class="dev__title">{{ profile.bio|truncatewords:10 }}</p>
+              <p class="dev__location">{{ profile.location }}</p>
+              <ul class="dev__social">
+                {% if profile.social_github %}
+                  <li><a title="Github" href="{{ profile.social_github }}" target="_blank"><i class="im im-github"></i></a></li>
+                {% endif %}
+                {% if profile.social_instagram %}
+                  <li><a title="Instagram" href="{{ profile.social_instagram }}" target="_blank"><i class="im im-instagram"></i></a></li>
+                {% endif %}
+                {% if profile.social_telegram %}
+                  <li><a title="Telegram" href="{{ profile.social_telegram }}" target="_blank"><i class="im im-telegram"></i></a></li>
+                {% endif %}
+                {% if profile.social_youtube %}
+                  <li><a title="YouTube" href="{{ profile.social_youtube }}" target="_blank"><i class="im im-youtube"></i></a></li>
+                {% endif %}
+              </ul>
+              <a href="#" class="btn btn--sub btn--lg">Habar jo'nating</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="column column--2of3">
+          <div class="devInfo">
+            <h3 class="devInfo__title">Men haqimda</h3>
+            <p class="devInfo__about">{{ profile.bio }}</p>
+          </div>
+
+          <div class="devInfo">
+            <h3 class="devInfo__title">Malakalari</h3>
+            <div class="devInfo__skills">
+              {% if profile.social_github %}<span class="tag tag--pill tag--sub tag--lg"><small>GitHub</small></span>{% endif %}
+              {% if profile.social_instagram %}<span class="tag tag--pill tag--sub tag--lg"><small>Instagram</small></span>{% endif %}
+              {% if profile.social_telegram %}<span class="tag tag--pill tag--sub tag--lg"><small>Telegram</small></span>{% endif %}
+              {% if profile.social_youtube %}<span class="tag tag--pill tag--sub tag--lg"><small>YouTube</small></span>{% endif %}
+            </div>
+          </div>
+
+          <div class="devInfo">
+            <h3 class="devInfo__title">Loyihalar</h3>
+            {% comment %} Agar sizda Project modeli bo‘lsa, shu yerga qo‘shishingiz mumkin {% endcomment %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

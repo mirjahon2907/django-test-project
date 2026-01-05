@@ -17,26 +17,33 @@ class Project(models.Model):
     tag = models.ManyToManyField('Tag', blank=True, related_name='project_tag')
 
 
-    @property
     def update_vote_count(self):
         reviews = self.review_set.all()
-        print(reviews)
         upVotes = reviews.filter(value=1).count()
         totalVotes = reviews.count()
 
-        ratio = (upVotes / totalVotes) * 100
-        self.vote_count = totalVotes
-        self.vote_ratio = ratio
+        if totalVotes > 0:
+            self.vote_ratio = int((upVotes / totalVotes) * 100)
+        else:
+            self.vote_ratio = 0
 
+        self.vote_count = totalVotes
         self.save()
+
 
 
 # Loyihaga bildirilgan fikrlar
 class Review(models.Model):
+
+    VOTE_TYPE = (
+        (1, 'Up Vote'),
+        (-1, 'Down Vote'),
+    )
+
     body = models.TextField()
-    value = models.IntegerField(default=0)
+    value = models.IntegerField(choices=VOTE_TYPE)
     created = models.DateField(auto_now_add=True)
-    project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True)
+    project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True,related_name='reviews')
     user = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
 
 

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Profile
 from projects.models import Review, Project
 def home_page(request):
@@ -66,6 +67,8 @@ def signin(request):
 def forget_password(request):
     return render(request, 'users/forgetpassword.html')
 
+
+@login_required(login_url='login')
 def account(request):
     return render(request, 'users/account.html')
 

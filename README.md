@@ -19,11 +19,11 @@ Bu loyiha orqali foydalanuvchilar:
 ---
 
 ## 📁 Loyiha tuzilmasi
-student_portfolio/
-│
-├── projects/ # Loyihalar app
-├── users/ # Foydalanuvchilar app
-├── media/ # Yuklangan fayllar
-├── manage.py
-├── requirements.txt
-└── README.md
+   -  student_portfolio/
+   - │
+   - ├── projects/ # Loyihalar app
+   - ├── users/ # Foydalanuvchilar app
+   - ├── media/ # Yuklangan fayllar
+   - ├── manage.py
+   - ├── requirements.txt
+   - └── README.md

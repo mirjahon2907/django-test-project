@@ -75,4 +75,9 @@ def account(request):
 def single_project(request):
     return render(request, 'users/single-project.html')
 
+def find_students(request):
+    query = request.GET.get('text', '')
+    profiles = Profile.objects.filter(name__icontains=query)
+    return render(request, 'users/index.html', {'profiles': profiles, 'query': query})
+
 

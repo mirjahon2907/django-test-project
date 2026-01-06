@@ -13,5 +13,6 @@ urlpatterns = [
     path('single-project/', single_project, name='single-project'),
     path('forget_password/', forget_password, name='forget_password'),
     path('profiles/<int:pk>', profile_detail, name='profile_detail'),
+    path('find_students/', find_students, name='find_students'),
 
 ]

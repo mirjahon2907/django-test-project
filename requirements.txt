@@ -1,3 +1,4 @@
 Django>=4.2
 Pillow
 python-dotenv
+djangorestframework

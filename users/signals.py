@@ -15,4 +15,3 @@ def create_profile(sender, instance, created, **kwargs):
         profile = Profile.objects.get(user=instance)
         profile.name = f"{instance.first_name} {instance.last_name}"
         profile.save()
-

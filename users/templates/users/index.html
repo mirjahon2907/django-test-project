@@ -34,7 +34,7 @@
         </label>
         <ul class="header__menu">
           <li class="header__menuItem"><a href="{% url 'home_page' %}">Bitiruvchilar</a></li>
-          <li class="header__menuItem"><a href="{% url 'projects' %}">Loyihalar</a></li>
+          <li class="header__menuItem"><a href='{% url 'projects:projects' %}'>Loyihalar</a></li>
 
           <li class="header__menuItem"><a href="{% url 'account' %}">Mening sahifam</a></li>
             {% if request.user.is_authenticated %}
@@ -56,11 +56,17 @@
         </div>
 
         <div class="hero-section__search">
-          <form class="form" action="#" method="get">
+          <form class="form" action="{% url 'find_students' %}" method="get">
             <div class="form__field">
               <label for="formInput#search">Bitiruvchilarni top </label>
-              <input class="input input--text" id="formInput#search" type="text" name="text"
-                placeholder="Bitiruvchi ismi bilan top" />
+                         <input
+                          class="input input--text"
+                          id="formInput#search"
+                          type="text"
+                          name="query"
+                          placeholder="Bitiruvchi ismi bilan top"
+                          value="{{ query }}"
+                        />
             </div>
 
             <input class="btn btn--sub btn--lg" type="submit" value="Qidir" />

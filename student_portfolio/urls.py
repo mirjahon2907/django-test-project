@@ -22,7 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include('users.urls')),
-    path("projects/", include('projects.urls')),
+    path('api/', include('projects.urls'))
 ]
 # rasm, fayl, videolarni url orqali ochish uchun
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

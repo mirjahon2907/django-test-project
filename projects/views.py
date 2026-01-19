@@ -1,24 +1,142 @@
-from .models import Project
-from .serializers import ProjectSerializer
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-
-
-@api_view(['GET'])
-def projects(request):
-    if request.method == 'GET':
-        projects = Project.objects.all()
-        serializer = ProjectSerializer(projects, many=True)
-        return Response(serializer.data)
+from .serializers import *
+from .models import Project, Review, Skill, Tag, Message
+from users.models import Profile
+from rest_framework import mixins, generics, viewsets
 
 
 
-@api_view(['GET'])
-def project_detail(request, pk):
-    try:
-        project = Project.objects.get(pk=pk)
-    except Project.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    if request.method == 'GET':
-        serializer = ProjectSerializer(project)
-        return Response(serializer.data)
+
+
+class ProjectViewSet(viewsets.ModelViewSet):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+
+
+class Reviews(mixins.ListModelMixin, mixins.CreateModelMixin ,generics.GenericAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+    def get(self,request):
+        return self.list(request)
+    
+    def post(self, request):
+        return self.create(request)
+    
+
+class ReviewDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+    def get(self, request, pk):
+        return self.retrieve(request, pk)
+
+    def put(self, request, pk):
+        return self.update(request, pk)
+
+    def delete(self, request, pk):
+        return self.destroy(request, pk)
+    
+
+class Skills(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    queryset = Skill.objects.all()
+    serializer_class = SkillSerializer
+
+    def get(self,request):
+        return self.list(request)
+    
+    def post(self, request):
+        return self.create(request)
+
+
+class SkillDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+    queryset = Skill.objects.all()
+    serializer_class = SkillSerializer
+
+    def get(self, request, pk):
+        return self.retrieve(request, pk)
+
+    def put(self, request, pk):
+        return self.update(request, pk)
+
+    def delete(self, request, pk):
+        return self.destroy(request, pk)
+
+
+
+
+class Profiles(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+    def get(self, request):
+        return self.list(request)
+    
+    def post(self,request):
+        return self.create(request)
+    
+
+class ProfileDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+    def get(self, request, pk):
+        return self.retrieve(request, pk)
+    
+    def put(self, request, pk):
+        return self.update(request, pk)
+    
+    def delete(self, request, pk):
+        return self.destroy(request, pk)
+    
+
+
+class Tags(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
+    def get(self, request):
+        return self.list(request)
+    
+    def post(self,request):
+        return self.create(request)
+    
+
+class TagDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
+    def get(self, request, pk):
+        return self.retrieve(request, pk)
+    
+    def put(self, request, pk):
+        return self.update(request, pk)
+    
+    def delete(self, request, pk):
+        return self.destroy(request, pk)
+    
+
+class Messages(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+
+    def get(self, request):
+        return self.list(request)
+
+    def post(self, request):
+        return self.create(request)
+    
+
+
+class MessageDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+
+    def get(self, request, pk):
+        return self.retrieve(request, pk)
+    
+    def put(self, request, pk):
+        return self.update(request, pk)
+    
+    def delete(self, request, pk):
+        return self.destroy(request, pk)
+

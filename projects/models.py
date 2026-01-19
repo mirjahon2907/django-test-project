@@ -49,6 +49,9 @@ class Review(models.Model):
     project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True,related_name='reviews')
     user = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return self.body
+
 
 # Loyiha qaysi til va freymvorklarda qilingan
 class Tag(models.Model):
@@ -67,9 +70,16 @@ class Message(models.Model):
     reciever = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, related_name='reciever_message')
 
 
+    def __str__(self):
+        return self.subject
+
+
 # Talaba malakalari. Bilgan freymvork va dasturlash tillari haqida
 class Skill(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     created = models.DateField(auto_now_add=True)
     user = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.name

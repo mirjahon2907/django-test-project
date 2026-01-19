@@ -9,9 +9,11 @@ from .models import Profile
 def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(
-            user=instance
+            user=instance,
+            name = f"{instance.username}"
+
         )
     else:
         profile = Profile.objects.get(user=instance)
-        profile.name = f"{instance.first_name} {instance.last_name}"
-        profile.save()
+        profile.name =  f"{instance.username}"
+        profile.save() 

@@ -34,7 +34,7 @@
         </label>
         <ul class="header__menu">
           <li class="header__menuItem"><a href="{% url 'home_page' %}">Bitiruvchilar</a></li>
-          <li class="header__menuItem"><a href='{% url 'projects:projects' %}'>Loyihalar</a></li>
+          <li class="header__menuItem"><a href="{% url 'projects:projects' %}">Loyihalar</a></li>
 
           <li class="header__menuItem"><a href="{% url 'account' %}">Mening sahifam</a></li>
             {% if request.user.is_authenticated %}

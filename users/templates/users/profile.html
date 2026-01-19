@@ -20,7 +20,7 @@
       <nav class="header__nav">
         <ul class="header__menu">
           <li class="header__menuItem"><a href="{% url 'home_page' %}">Bitiruvchilar</a></li>
-          <li class="header__menuItem"><a href="{% url 'projects' %}">Loyihalar</a></li>
+          <li class="header__menuItem"><a href="{% url 'projects:projects' %}">Loyihalar</a></li>
           {% if request.user.is_authenticated %}
             <li class="header__menuItem"><a href="{% url 'logout' %}" class="btn btn--sub">Chiqish</a></li>
           {% else %}

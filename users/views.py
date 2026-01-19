@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from projects.models import Review, Project
+
 def home_page(request):
     profiles = Profile.objects.all()
     return render(request, 'users/index.html', {'profiles': profiles})
@@ -14,7 +15,6 @@ def home_page(request):
 def profile_detail(request, pk):
     profile = get_object_or_404(Profile, pk=pk)
     return render(request, 'users/profile.html', {'profile': profile})
-
 
 
 def login_user(request):
@@ -32,6 +32,7 @@ def login_user(request):
             print('Login failed')
 
     return render(request, 'users/login.html')
+
 
 def logout_user(request):
     logout(request)
@@ -64,6 +65,7 @@ def signup(request):
 def signin(request):
     return render(request, 'users/login.html')
 
+
 def forget_password(request):
     return render(request, 'users/forgetpassword.html')
 
@@ -72,12 +74,12 @@ def forget_password(request):
 def account(request):
     return render(request, 'users/account.html')
 
+
 def single_project(request):
     return render(request, 'users/single-project.html')
+
 
 def find_students(request):
     query = request.GET.get('text', '')
     profiles = Profile.objects.filter(name__icontains=query)
     return render(request, 'users/index.html', {'profiles': profiles, 'query': query})
-
-
